@@ -11,7 +11,11 @@ except:
 fh = urllib.urlopen(url)
 soup = BeautifulSoup(fh,'lxml')
 recipe = soup.title.string.encode('ascii','ignore')
-ingredients = [x.string.encode('ascii','ignore') for x in soup.find('div','jetpack-recipe-ingredients').find_all('li')]
-print recipe,url
+print recipe
+print url
+try:
+    ingredients = [x.string.encode('ascii','ignore') for x in soup.find('div','jetpack-recipe-ingredients').find_all('li')]
+except:
+    ingredients = ['Error: read manually from %s'%url]
 for x in ingredients:
     print x
